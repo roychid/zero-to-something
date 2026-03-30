@@ -2,656 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEOGREATS — Zero to Something</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #010101;
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.5;
-        }
-
-        /* Typography */
-        h1 {
-            font-size: clamp(36px, 10vw, 120px);
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            line-height: 1;
-            text-transform: uppercase;
-        }
-
-        h2 {
-            font-size: clamp(28px, 5vw, 56px);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 24px;
-        }
-
-        h3 {
-            font-size: clamp(18px, 4vw, 24px);
-            font-weight: 700;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Buttons */
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: #fff;
-            color: #000;
-            padding: 14px 32px;
-            font-weight: 700;
-            font-size: 14px;
-            text-decoration: none;
-            border-radius: 40px;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            gap: 16px;
-            background: #eee;
-        }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: transparent;
-            color: #fff;
-            padding: 14px 32px;
-            font-weight: 600;
-            font-size: 14px;
-            text-decoration: none;
-            border-radius: 40px;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.2s;
-        }
-
-        .btn-outline:hover {
-            border-color: #fff;
-            gap: 16px;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(1,1,1,0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 12px 0;
-        }
-
-        .nav-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: 20px;
-            text-decoration: none;
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-        }
-
-        .nav-links a {
-            color: #aaa;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #fff;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding: 100px 0 60px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.05);
-            padding: 6px 16px;
-            border-radius: 40px;
-            font-size: 11px;
-            margin-bottom: 24px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .hero h1 .outline {
-            color: transparent;
-            -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
-        }
-
-        .hero p {
-            font-size: 16px;
-            color: #aaa;
-            max-width: 580px;
-            margin: 24px 0 32px;
-            line-height: 1.6;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        /* Stats Grid - Responsive */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            padding: 60px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            margin: 40px 0;
-        }
-
-        .stat-number {
-            font-size: clamp(32px, 6vw, 56px);
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .stat-label {
-            font-size: clamp(10px, 3vw, 14px);
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 8px;
-        }
-
-        /* Section Headers */
-        .section-header {
-            text-align: center;
-            margin: 60px 0 40px;
-        }
-
-        .section-tag {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #ffb347;
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        /* Course Cards - Responsive Grid */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .course-card {
-            background: rgba(20,20,20,0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 24px;
-            transition: all 0.3s;
-        }
-
-        .course-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255,255,255,0.15);
-            background: rgba(30,30,30,0.7);
-        }
-
-        .course-icon {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-
-        .course-card p {
-            color: #888;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        /* Reels Grid - Responsive Passport Size */
-        .reels-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin: 40px 0;
-        }
-
-        .reel-card {
-            background: rgba(12,12,12,0.6);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
-            transition: all 0.3s;
-        }
-
-        .reel-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255,255,255,0.18);
-        }
-
-        .video-container {
-            aspect-ratio: 1 / 1;
-            background: #0a0a0a;
-            cursor: pointer;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .reel-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .reel-info {
-            padding: 12px;
-        }
-
-        .reel-caption {
-            font-size: 12px;
-            color: #ccc;
-            margin-bottom: 10px;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .reel-stats {
-            display: flex;
-            gap: 12px;
-            font-size: 11px;
-            color: #666;
-            flex-wrap: wrap;
-        }
-
-        .reel-stats i {
-            margin-right: 4px;
-        }
-
-        /* Comments Section - Responsive */
-        .comments-section {
-            background: rgba(20,20,20,0.4);
-            border-radius: 28px;
-            padding: 40px 32px;
-            margin: 60px 0;
-        }
-
-        .comments-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 32px;
-        }
-
-        .comment {
-            background: rgba(255,255,255,0.03);
-            border-radius: 20px;
-            padding: 20px;
-        }
-
-        .comment-text {
-            font-size: 13px;
-            line-height: 1.6;
-            color: #ccc;
-            margin-bottom: 12px;
-            font-style: italic;
-        }
-
-        .comment-author {
-            font-weight: 600;
-            color: #ffb347;
-            font-size: 12px;
-        }
-
-        /* CTA Section - Responsive */
-        .cta-section {
-            background: linear-gradient(135deg, rgba(255,180,71,0.1) 0%, rgba(0,0,0,0) 100%);
-            border-radius: 32px;
-            padding: 60px 32px;
-            text-align: center;
-            margin: 60px 0;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .cta-section h2 {
-            font-size: clamp(28px, 6vw, 48px);
-            margin-bottom: 20px;
-        }
-
-        .cta-section p {
-            color: #aaa;
-            max-width: 600px;
-            margin: 0 auto 28px;
-            font-size: 14px;
-        }
-
-        /* Footer - Responsive */
-        footer {
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding: 48px 0 32px;
-            margin-top: 48px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-        }
-
-        .footer-logo {
-            font-size: 20px;
-            font-weight: 800;
-            text-decoration: none;
-            color: #fff;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-
-        .footer-about {
-            color: #666;
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        .footer-col h4 {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-            color: #888;
-        }
-
-        .footer-col a {
-            display: block;
-            color: #666;
-            text-decoration: none;
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-
-        .footer-col a:hover {
-            color: #fff;
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            padding-top: 28px;
-            margin-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            font-size: 11px;
-            color: #555;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 48px;
-            color: #666;
-            grid-column: 1 / -1;
-        }
-
-        .error-msg {
-            text-align: center;
-            padding: 48px;
-            color: #666;
-            grid-column: 1 / -1;
-        }
-
-        .error-msg code {
-            display: block;
-            margin-top: 10px;
-            font-size: 11px;
-            color: #ffb347;
-            font-family: monospace;
-        }
-
-        /* ============================================ */
-        /* RESPONSIVE BREAKPOINTS */
-        /* ============================================ */
-
-        /* Tablet (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .container {
-                padding: 0 20px;
-            }
-            
-            .reels-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            
-            .courses-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .comments-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats-grid {
-                gap: 20px;
-            }
-        }
-
-        /* Mobile Landscape (480px - 768px) */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero {
-                padding: 80px 0 40px;
-                min-height: auto;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .hero-buttons a {
-                justify-content: center;
-                width: 100%;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 24px;
-                padding: 40px 0;
-            }
-            
-            .reels-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-            }
-            
-            .courses-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .comments-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .comments-section {
-                padding: 32px 24px;
-            }
-            
-            .cta-section {
-                padding: 40px 24px;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 32px;
-                text-align: center;
-            }
-            
-            .footer-about {
-                max-width: 100%;
-                text-align: center;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .section-header {
-                margin: 40px 0 32px;
-            }
-        }
-
-        /* Mobile Portrait (320px - 480px) */
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 16px;
-            }
-            
-            .hero-badge {
-                font-size: 10px;
-                padding: 4px 12px;
-            }
-            
-            .hero p {
-                font-size: 14px;
-            }
-            
-            .btn-primary, .btn-outline {
-                padding: 12px 24px;
-                font-size: 13px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-            }
-            
-            .stat-number {
-                font-size: 28px;
-            }
-            
-            .stat-label {
-                font-size: 9px;
-            }
-            
-            .reels-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            
-            .reel-info {
-                padding: 8px;
-            }
-            
-            .reel-caption {
-                font-size: 10px;
-                -webkit-line-clamp: 2;
-            }
-            
-            .reel-stats {
-                font-size: 9px;
-                gap: 8px;
-            }
-            
-            .course-card {
-                padding: 20px;
-            }
-            
-            .course-icon {
-                font-size: 28px;
-                margin-bottom: 16px;
-            }
-            
-            .course-card h3 {
-                font-size: 18px;
-            }
-            
-            .course-card p {
-                font-size: 12px;
-            }
-            
-            .comment {
-                padding: 16px;
-            }
-            
-            .comment-text {
-                font-size: 12px;
-            }
-            
-            .cta-section h2 {
-                font-size: 24px;
-            }
-            
-            .cta-section p {
-                font-size: 12px;
-            }
-        }
-
-        /* Extra Small (below 360px) */
-        @media (max-width: 360px) {
-            .reels-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .reel-caption {
-                -webkit-line-clamp: 3;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #010101; color: #fff; font-family: 'Inter', sans-serif; line-height: 1.5; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        h1 { font-size: clamp(36px, 10vw, 120px); font-weight: 900; letter-spacing: -0.02em; line-height: 1; text-transform: uppercase; }
+        h2 { font-size: clamp(28px, 5vw, 56px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 24px; }
+        h3 { font-size: clamp(18px, 4vw, 24px); font-weight: 700; }
+        .btn-primary, .btn-outline { display: inline-flex; align-items: center; gap: 12px; padding: 14px 32px; font-weight: 700; font-size: 14px; text-decoration: none; border-radius: 40px; transition: all 0.2s; cursor: pointer; }
+        .btn-primary { background: #fff; color: #000; }
+        .btn-primary:hover { transform: translateY(-2px); gap: 16px; background: #eee; }
+        .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+        .btn-outline:hover { border-color: #fff; gap: 16px; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(1,1,1,0.95); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 0; }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        .logo { font-weight: 800; font-size: 20px; text-decoration: none; color: #fff; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { color: #aaa; text-decoration: none; font-weight: 500; font-size: 14px; }
+        .nav-links a:hover { color: #fff; }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 0 60px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); padding: 6px 16px; border-radius: 40px; font-size: 11px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1); }
+        .hero h1 .outline { color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,0.3); }
+        .hero p { font-size: 16px; color: #aaa; max-width: 580px; margin: 24px 0 32px; line-height: 1.6; }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); margin: 40px 0; }
+        .stat-number { font-size: clamp(32px, 6vw, 56px); font-weight: 800; color: #fff; }
+        .stat-label { font-size: clamp(10px, 3vw, 14px); color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+        .section-header { text-align: center; margin: 60px 0 40px; }
+        .section-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #ffb347; margin-bottom: 12px; display: inline-block; }
+        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin: 40px 0; }
+        .course-card { background: rgba(20,20,20,0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 24px; transition: all 0.3s; }
+        .course-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.15); }
+        .course-icon { font-size: 32px; margin-bottom: 20px; }
+        .course-card p { color: #888; font-size: 13px; line-height: 1.5; }
+        .reels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0; }
+        .reel-card { background: rgba(12,12,12,0.6); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s; }
+        .reel-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.18); }
+        .video-container { aspect-ratio: 1 / 1; background: #0a0a0a; cursor: pointer; overflow: hidden; position: relative; }
+        .reel-video { width: 100%; height: 100%; object-fit: cover; }
+        .reel-info { padding: 12px; }
+        .reel-caption { font-size: 12px; color: #ccc; margin-bottom: 10px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .reel-stats { display: flex; gap: 12px; font-size: 11px; color: #666; flex-wrap: wrap; }
+        .comments-section { background: rgba(20,20,20,0.4); border-radius: 28px; padding: 40px 32px; margin: 60px 0; }
+        .comments-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+        .comment { background: rgba(255,255,255,0.03); border-radius: 20px; padding: 20px; }
+        .comment-text { font-size: 13px; line-height: 1.6; color: #ccc; margin-bottom: 12px; font-style: italic; }
+        .comment-author { font-weight: 600; color: #ffb347; font-size: 12px; }
+        .cta-section { background: linear-gradient(135deg, rgba(255,180,71,0.1) 0%, rgba(0,0,0,0) 100%); border-radius: 32px; padding: 60px 32px; text-align: center; margin: 60px 0; border: 1px solid rgba(255,255,255,0.05); }
+        .cta-section h2 { font-size: clamp(28px, 6vw, 48px); margin-bottom: 20px; }
+        .cta-section p { color: #aaa; max-width: 600px; margin: 0 auto 28px; font-size: 14px; }
+        footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 48px 0 32px; margin-top: 48px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+        .footer-logo { font-size: 20px; font-weight: 800; text-decoration: none; color: #fff; display: inline-block; margin-bottom: 12px; }
+        .footer-about { color: #666; font-size: 12px; line-height: 1.6; }
+        .footer-col h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; color: #888; }
+        .footer-col a { display: block; color: #666; text-decoration: none; font-size: 12px; margin-bottom: 10px; }
+        .footer-col a:hover { color: #fff; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-top: 28px; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 11px; color: #555; }
+        .loading { text-align: center; padding: 48px; color: #666; grid-column: 1 / -1; }
+        @media (max-width: 1024px) { .reels-grid { grid-template-columns: repeat(2, 1fr); } .comments-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .nav-links { display: none; } .hero-buttons { flex-direction: column; width: 100%; } .hero-buttons a { justify-content: center; width: 100%; } .stats-grid { grid-template-columns: repeat(2, 1fr); } .reels-grid { grid-template-columns: repeat(2, 1fr); } .comments-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; text-align: center; } }
+        @media (max-width: 480px) { .reels-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } .stats-grid { grid-template-columns: repeat(2, 1fr); } .reel-caption { font-size: 10px; } .reel-stats { font-size: 9px; } }
+        @media (max-width: 360px) { .reels-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr; text-align: center; } }
     </style>
 </head>
 <body>
@@ -669,17 +85,13 @@
 </nav>
 
 <main>
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-badge">
                 <i class="fab fa-instagram"></i>
                 <span id="hero-badge-text">@neogreats · LOADING...</span>
             </div>
-            <h1>
-                Zero to<br/>
-                <span class="outline">Something.</span>
-            </h1>
+            <h1>Zero to<br/><span class="outline">Something.</span></h1>
             <p id="hero-bio">Loading the journey...</p>
             <div class="hero-buttons">
                 <a href="#courses" class="btn-primary">Start Your Journey <i class="fas fa-arrow-right"></i></a>
@@ -688,7 +100,6 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
     <div class="container">
         <div class="stats-grid" id="stats-container">
             <div><div class="stat-number">--</div><div class="stat-label">Followers</div></div>
@@ -698,7 +109,6 @@
         </div>
     </div>
 
-    <!-- Journey Section -->
     <div class="container" id="journey">
         <div class="section-header">
             <div class="section-tag">THE JOURNEY</div>
@@ -710,37 +120,19 @@
         </div>
     </div>
 
-    <!-- Courses Section -->
     <div class="container" id="courses">
         <div class="section-header">
             <div class="section-tag">LEARN FROM EXPERIENCE</div>
             <h2>Courses built from<br/>what actually worked.</h2>
         </div>
         <div class="courses-grid">
-            <div class="course-card">
-                <div class="course-icon"><i class="fas fa-chart-line"></i></div>
-                <h3>Zero to Income</h3>
-                <p>Everything I know about building income online. No fluff. Just what actually works.</p>
-            </div>
-            <div class="course-card">
-                <div class="course-icon"><i class="fas fa-brain"></i></div>
-                <h3>The Zero Mindset</h3>
-                <p>The mental shifts that got me from stuck to moving.</p>
-            </div>
-            <div class="course-card">
-                <div class="course-icon"><i class="fas fa-users"></i></div>
-                <h3>Build in Public</h3>
-                <p>How I went from zero to 7,900+ followers documenting my journey.</p>
-            </div>
-            <div class="course-card">
-                <div class="course-icon"><i class="fas fa-dollar-sign"></i></div>
-                <h3>First $1K Online</h3>
-                <p>Step-by-step breakdown of exactly how I hit my first $1,000.</p>
-            </div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-chart-line"></i></div><h3>Zero to Income</h3><p>Everything I know about building income online. No fluff. Just what actually works.</p></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-brain"></i></div><h3>The Zero Mindset</h3><p>The mental shifts that got me from stuck to moving.</p></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-users"></i></div><h3>Build in Public</h3><p>How I went from zero to documenting my journey in public.</p></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-dollar-sign"></i></div><h3>First $1K Online</h3><p>Step-by-step breakdown of exactly how I hit my first $1,000.</p></div>
         </div>
     </div>
 
-    <!-- Reels Section -->
     <div class="container" id="reels">
         <div class="section-header">
             <div class="section-tag"><i class="fab fa-instagram"></i> LATEST REELS</div>
@@ -756,7 +148,6 @@
         </div>
     </div>
 
-    <!-- Comments Section -->
     <div class="container" id="community">
         <div class="comments-section">
             <div class="section-header" style="margin: 0 0 20px 0;">
@@ -769,7 +160,6 @@
         </div>
     </div>
 
-    <!-- CTA Section -->
     <div class="container">
         <div class="cta-section">
             <h2>Stop watching.<br/>Start moving.</h2>
@@ -782,63 +172,143 @@
 <footer>
     <div class="container">
         <div class="footer-grid">
-            <div>
-                <a href="#" class="footer-logo">NEOGREATS</a>
-                <div class="footer-about" id="footer-bio">Zero to Something — The honest journey documented on Instagram. No filter. Just the real work.</div>
-            </div>
-            <div class="footer-col">
-                <h4>Navigate</h4>
-                <a href="#journey">The Journey</a>
-                <a href="#courses">Courses</a>
-                <a href="#reels">Reels</a>
-                <a href="#community">Community</a>
-            </div>
-            <div class="footer-col">
-                <h4>Connect</h4>
-                <a href="https://www.instagram.com/neogreats/" target="_blank">Instagram</a>
-                <a href="#" id="footer-linktree">Linktree</a>
-                <a href="#">Contact</a>
-            </div>
+            <div><a href="#" class="footer-logo">NEOGREATS</a><div class="footer-about" id="footer-bio">Zero to Something — The honest journey documented on Instagram.</div></div>
+            <div class="footer-col"><h4>Navigate</h4><a href="#journey">The Journey</a><a href="#courses">Courses</a><a href="#reels">Reels</a><a href="#community">Community</a></div>
+            <div class="footer-col"><h4>Connect</h4><a href="https://www.instagram.com/neogreats/" target="_blank">Instagram</a><a href="#">Contact</a></div>
         </div>
-        <div class="footer-bottom">
-            <div>© 2026 NEOGREATS — <span id="footer-tagline">Still building.</span></div>
-            <div><a href="https://www.instagram.com/neogreats/" target="_blank" style="color:#666; text-decoration:none;"><i class="fab fa-instagram"></i> @neogreats</a></div>
-        </div>
+        <div class="footer-bottom"><div>© 2026 NEOGREATS — Still building.</div><div><a href="https://www.instagram.com/neogreats/" target="_blank" style="color:#666; text-decoration:none;"><i class="fab fa-instagram"></i> @neogreats</a></div></div>
     </div>
 </footer>
 
 <script>
-    const API_URL = '/api/instagram/all';
-
+    // Instagram API via CORS proxy
+    const USERNAME = "neogreats";
+    const RAPIDAPI_KEY = "b1d4f776c5msh0a5a6ce81cd9670p1e5ae8jsn169c02186937";
+    
+    // Use a CORS proxy to avoid API restrictions
+    const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+    
+    async function fetchInstagramData() {
+        try {
+            // Fetch reels
+            const reelsResponse = await fetch(`${PROXY_URL}https://instagram120.p.rapidapi.com/api/instagram/reels`, {
+                method: 'POST',
+                headers: {
+                    'x-rapidapi-key': RAPIDAPI_KEY,
+                    'x-rapidapi-host': 'instagram120.p.rapidapi.com',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: USERNAME, maxId: "" })
+            });
+            
+            const reelsData = await reelsResponse.json();
+            const edges = reelsData?.result?.edges || [];
+            
+            // Fetch user info
+            const userResponse = await fetch(`${PROXY_URL}https://instagram120.p.rapidapi.com/api/instagram/userInfo`, {
+                method: 'POST',
+                headers: {
+                    'x-rapidapi-key': RAPIDAPI_KEY,
+                    'x-rapidapi-host': 'instagram120.p.rapidapi.com',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: USERNAME })
+            });
+            
+            const userData = await userResponse.json();
+            const userResult = userData?.result?.[0]?.user || userData?.result || {};
+            
+            // Parse reels
+            const reels = [];
+            for (let edge of edges.slice(0, 5)) {
+                const media = edge?.node?.media || edge?.node || {};
+                if (media.media_type === 2) {
+                    const videoUrl = media?.video_versions?.[0]?.url || null;
+                    const thumbnail = media?.image_versions2?.candidates?.[0]?.url || null;
+                    const caption = media?.caption?.text || "";
+                    
+                    reels.push({
+                        code: media.code || "",
+                        video_url: videoUrl,
+                        thumbnail: thumbnail,
+                        caption: caption,
+                        likes: media.like_count || 0,
+                        comments: media.comment_count || 0,
+                        plays: media.play_count || 0,
+                        ig_link: `https://www.instagram.com/reel/${media.code}/`
+                    });
+                }
+            }
+            
+            const user = {
+                username: userResult.username || USERNAME,
+                bio: userResult.biography || "Zero to Something — documenting the journey",
+                followers: userResult.follower_count || 0,
+                posts: userResult.media_count || 0
+            };
+            
+            // Update UI
+            document.getElementById('hero-badge-text').innerHTML = `@${user.username} · ${formatNumber(user.followers)} FOLLOWERS · NO FILTER`;
+            document.getElementById('hero-bio').innerHTML = user.bio;
+            
+            document.getElementById('stats-container').innerHTML = `
+                <div><div class="stat-number">${formatNumber(user.followers)}</div><div class="stat-label">Followers</div></div>
+                <div><div class="stat-number">${formatNumber(user.posts)}</div><div class="stat-label">Posts</div></div>
+                <div><div class="stat-number">4</div><div class="stat-label">Courses</div></div>
+                <div><div class="stat-number">200+</div><div class="stat-label">Mentored</div></div>
+            `;
+            
+            // Journey section (first 3 reels)
+            const journeyContainer = document.getElementById('journey-container');
+            if (reels.length) {
+                journeyContainer.innerHTML = reels.slice(0, 3).map(reel => reelCard(reel, false)).join('');
+            } else {
+                journeyContainer.innerHTML = '<div class="loading">No posts yet</div>';
+            }
+            
+            // Reels section (all with controls)
+            const reelsContainer = document.getElementById('reels-container');
+            if (reels.length) {
+                reelsContainer.innerHTML = reels.map(reel => reelCard(reel, true)).join('');
+            } else {
+                reelsContainer.innerHTML = '<div class="loading">No reels found</div>';
+            }
+            
+            // Comments
+            document.getElementById('comments-container').innerHTML = `
+                <div class="comment"><div class="comment-text">"Been following since early on. This man is the realest. No fake guru stuff. Just actual work."</div><div class="comment-author">Community Member</div></div>
+                <div class="comment"><div class="comment-text">"The Zero to Income content changed everything for me. Thank you for being honest about the process."</div><div class="comment-author">Community Member</div></div>
+                <div class="comment"><div class="comment-text">"Watching someone document the real slow weeks made me believe I could do it too."</div><div class="comment-author">Community Member</div></div>
+            `;
+            
+            document.getElementById('footer-bio').innerHTML = user.bio;
+            
+            setupVideoHover();
+            
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('reels-container').innerHTML = `<div class="loading">Error loading Instagram data. Please check console.</div>`;
+        }
+    }
+    
     function formatNumber(num) {
-        if (!num && num !== 0) return '0';
-        num = parseInt(num) || 0;
+        if (!num) return '0';
         if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
         if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
         return num.toString();
     }
-
-    function reelCard(reel, controls = false) {
-        const caption = reel.caption
-            ? reel.caption.substring(0, 100) + (reel.caption.length > 100 ? '...' : '')
-            : '';
-        const igLink = reel.ig_link || `https://www.instagram.com/neogreats/`;
-
-        const media = reel.video_url
-            ? `<video class="reel-video"
-                    poster="${reel.thumbnail || ''}"
-                    preload="metadata"
-                    ${controls ? 'controls' : 'muted loop'}
-                    playsinline>
-                 <source src="${reel.video_url}" type="video/mp4">
-               </video>`
-            : `<img src="${reel.thumbnail || ''}"
-                    style="width:100%;height:100%;object-fit:cover;"
-                    alt="${caption}">`;
-
+    
+    function reelCard(reel, controls) {
+        const caption = reel.caption ? reel.caption.substring(0, 80) + (reel.caption.length > 80 ? '...' : '') : '';
+        const media = reel.video_url ? 
+            `<video class="reel-video" poster="${reel.thumbnail || ''}" preload="metadata" ${controls ? 'controls' : 'muted loop'} playsinline>
+                <source src="${reel.video_url}" type="video/mp4">
+             </video>` :
+            `<img src="${reel.thumbnail || ''}" style="width:100%;height:100%;object-fit:cover;">`;
+        
         return `
             <div class="reel-card">
-                <a href="${igLink}" target="_blank" style="display:block;text-decoration:none;">
+                <a href="${reel.ig_link}" target="_blank" style="display:block;text-decoration:none;">
                     <div class="video-container">${media}</div>
                 </a>
                 <div class="reel-info">
@@ -851,7 +321,7 @@
                 </div>
             </div>`;
     }
-
+    
     function setupVideoHover() {
         document.querySelectorAll('.reel-video:not([controls])').forEach(video => {
             video.muted = true;
@@ -859,103 +329,8 @@
             video.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
         });
     }
-
-    async function loadData() {
-        try {
-            const response = await fetch(API_URL);
-            if (!response.ok) throw new Error(`Server error: ${response.status}`);
-            const data = await response.json();
-            if (!data.success) throw new Error(data.error || 'API returned success: false');
-
-            // Hero
-            document.getElementById('hero-badge-text').textContent =
-                `@${data.user.username} · ${formatNumber(data.user.followers)} FOLLOWERS · NO FILTER`;
-            document.getElementById('hero-bio').textContent = data.user.bio || '';
-
-            // Stats
-            document.getElementById('stats-container').innerHTML = `
-                <div>
-                    <div class="stat-number">${formatNumber(data.user.followers)}</div>
-                    <div class="stat-label">Followers</div>
-                </div>
-                <div>
-                    <div class="stat-number">${formatNumber(data.user.posts)}</div>
-                    <div class="stat-label">Posts</div>
-                </div>
-                <div>
-                    <div class="stat-number">${data.stats.courses}</div>
-                    <div class="stat-label">Courses</div>
-                </div>
-                <div>
-                    <div class="stat-number">${formatNumber(data.stats.mentored)}+</div>
-                    <div class="stat-label">Mentored</div>
-                </div>
-            `;
-
-            // Journey
-            const journeyEl = document.getElementById('journey-container');
-            if (data.reels && data.reels.length > 0) {
-                journeyEl.innerHTML = data.reels.map(r => reelCard(r, false)).join('');
-            } else {
-                journeyEl.innerHTML = `<div class="error-msg">No posts yet.<code>Check Flask terminal for API errors.</code></div>`;
-            }
-
-            // Reels
-            const reelsEl = document.getElementById('reels-container');
-            if (data.reels && data.reels.length > 0) {
-                reelsEl.innerHTML = data.reels.map(r => reelCard(r, true)).join('');
-            } else {
-                reelsEl.innerHTML = `<div class="error-msg">No reels yet.<code>Check Flask terminal for API errors.</code></div>`;
-            }
-
-            // Comments
-            document.getElementById('comments-container').innerHTML = `
-                <div class="comment">
-                    <div class="comment-text">"Been following since early on. This man is the realest. No fake guru stuff. Just actual work."</div>
-                    <div class="comment-author">Community Member</div>
-                </div>
-                <div class="comment">
-                    <div class="comment-text">"The Zero to Income content changed everything for me. Thank you for being honest about the process."</div>
-                    <div class="comment-author">Community Member</div>
-                </div>
-                <div class="comment">
-                    <div class="comment-text">"Watching someone document the real slow weeks made me believe I could do it too. Now I'm doing it."</div>
-                    <div class="comment-author">Community Member</div>
-                </div>
-            `;
-
-            // Footer
-            if (data.user.bio) {
-                document.getElementById('footer-bio').textContent = data.user.bio;
-            }
-            if (data.user.external_url) {
-                const lt = document.getElementById('footer-linktree');
-                lt.href = data.user.external_url;
-                lt.textContent = 'Linktree';
-            }
-
-            setupVideoHover();
-
-        } catch (error) {
-            console.error('Load error:', error);
-            const errHTML = `
-                <div class="error-msg">
-                    <i class="fab fa-instagram" style="font-size:28px;color:#ffb347;display:block;margin-bottom:12px;"></i>
-                    Could not connect to Flask server.<br/>
-                    <code>Make sure app.py is running: python app.py</code>
-                    <code style="margin-top:6px;color:#888;">${error.message}</code>
-                </div>`;
-
-            document.getElementById('journey-container').innerHTML = errHTML;
-            document.getElementById('reels-container').innerHTML = errHTML;
-            document.getElementById('comments-container').innerHTML = errHTML;
-
-            document.getElementById('hero-badge-text').textContent = '@neogreats · NO FILTER';
-            document.getElementById('hero-bio').textContent = 'Zero to Something — documenting the journey.';
-        }
-    }
-
-    loadData();
+    
+    fetchInstagramData();
 </script>
 </body>
 </html>
