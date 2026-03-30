@@ -2,11 +2,13 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 import requests
 import traceback
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-RAPIDAPI_KEY = "b1d4f776c5msh0a5a6ce81cd9670p1e5ae8jsn169c02186937"
+# Get API key from environment variable (set in Vercel dashboard)
+RAPIDAPI_KEY = os.environ.get("RAPIDAPI_KEY", "b1d4f776c5msh0a5a6ce81cd9670p1e5ae8jsn169c02186937")
 USERNAME = "neogreats"
 
 HEADERS = {
@@ -37,7 +39,6 @@ def get_all():
         user_res.raise_for_status()
         user_raw = user_res.json()
 
-        # result is a LIST: [ { 'user': {...}, 'status': 'ok' } ]
         raw_result = user_raw.get("result", [])
         if isinstance(raw_result, list) and len(raw_result) > 0:
             user_result = raw_result[0].get("user", raw_result[0])
@@ -69,7 +70,6 @@ def get_all():
         reels_res.raise_for_status()
         reels_raw = reels_res.json()
 
-        # Try multiple possible response shapes
         edges = (
             safe_get(reels_raw, "result", "edges", default=[]) or
             safe_get(reels_raw, "data", "edges", default=[]) or
@@ -80,22 +80,19 @@ def get_all():
 
         reels = []
         for edge in edges[:6]:
-            node  = edge.get("node", edge)
+            node = edge.get("node", edge)
             media = node.get("media", node)
 
-            # Get best video URL
             video_url = None
             vid_versions = media.get("video_versions", [])
             if vid_versions:
                 video_url = vid_versions[0].get("url")
 
-            # Get thumbnail
             thumb = None
             img_candidates = safe_get(media, "image_versions2", "candidates", default=[])
             if img_candidates:
                 thumb = img_candidates[0].get("url")
 
-            # Caption text
             caption_obj = media.get("caption") or {}
             caption = (
                 caption_obj.get("text", "") if isinstance(caption_obj, dict)
@@ -116,7 +113,7 @@ def get_all():
                 "ig_link": f"https://www.instagram.com/reel/{media.get('code', '')}/" if media.get("code") else f"https://www.instagram.com/{USERNAME}/"
             })
 
-        # ── 3. POSTS (optional — for journey section) ─────────────
+        # ── 3. POSTS ──────────────────────────────────────────────
         posts_res = requests.post(
             "https://instagram120.p.rapidapi.com/api/instagram/posts",
             json={"username": USERNAME, "maxId": ""},
@@ -133,7 +130,7 @@ def get_all():
 
         posts = []
         for edge in post_edges[:6]:
-            node  = edge.get("node", edge)
+            node = edge.get("node", edge)
             media = node.get("media", node)
 
             img_candidates = safe_get(media, "image_versions2", "candidates", default=[])
@@ -156,7 +153,6 @@ def get_all():
                 "ig_link": f"https://www.instagram.com/p/{media.get('code', '')}/" if media.get("code") else ""
             })
 
-        # ── 4. RETURN ─────────────────────────────────────────────
         followers = user.get("followers", 0)
 
         return jsonify({
@@ -183,7 +179,6 @@ def get_all():
 
 @app.route('/api/debug', methods=['GET'])
 def debug():
-    """Hit this endpoint to see raw API responses in browser."""
     try:
         user_res = requests.post(
             "https://instagram120.p.rapidapi.com/api/instagram/userInfo",
@@ -202,7 +197,7 @@ def debug():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-# Vercel requires this
+# Required for Vercel
 app = app
 
 if __name__ == '__main__':
