@@ -181,11 +181,13 @@
 </footer>
 
 <script>
-    // Instagram API via CORS proxy
     const USERNAME = "neogreats";
-    const RAPIDAPI_KEY = "b1d4f776c5msh0a5a6ce81cd9670p1e5ae8jsn169c02186937";
     
-    // Use a CORS proxy to avoid API restrictions
+    // Get API key from Vercel environment variable (injected at build time)
+    // The __RAPIDAPI_KEY__ will be replaced during Vercel build
+    const RAPIDAPI_KEY = window.RAPIDAPI_KEY || "__RAPIDAPI_KEY__";
+    
+    // Use a CORS proxy
     const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
     
     async function fetchInstagramData() {
